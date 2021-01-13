@@ -6,7 +6,7 @@
 /*   By: fcatinau <fcatinau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 15:32:40 by fcatinau          #+#    #+#             */
-/*   Updated: 2021/01/10 21:40:08 by fcatinau         ###   ########.fr       */
+/*   Updated: 2021/01/13 14:54:13 by fcatinau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putendl_fd(char const *s, int fd);
 void			ft_putstr_fd(char const *s, int fd);
 void			ft_putnbr_fd(int nb, int fd);
-char				**ft_split(char const *s, char c);
+char			**ft_split(char const *s, char c);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char			*ft_strtrim(char const *s1, char const *set);
