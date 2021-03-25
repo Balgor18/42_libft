@@ -6,7 +6,7 @@
 /*   By: fcatinau <fcatinau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 15:35:06 by fcatinau          #+#    #+#             */
-/*   Updated: 2021/01/09 23:27:34 by fcatinau         ###   ########.fr       */
+/*   Updated: 2021/03/25 16:14:00 by fcatinau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		ft_strlen(char *c)
 	int i;
 
 	i = 0;
+	if (!c)
+		return (i);
 	while (c[i])
 		i++;
 	return (i);
