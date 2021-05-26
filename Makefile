@@ -6,7 +6,7 @@
 #    By: fcatinau <fcatinau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/09 15:35:09 by fcatinau          #+#    #+#              #
-#    Updated: 2021/04/01 18:12:27 by fcatinau         ###   ########.fr        #
+#    Updated: 2021/05/26 17:09:10 by fcatinau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,5 +57,6 @@ bonus : $(OBJ_BONUS) $(OBJ)
 
 norme :
 		norminette -R CheckForbiddenSourceHeader $(SRC) $(SRC_BONUS)
+		norminette -R CheckDefine cub3D.h
 
 .PHONY: clean fclean $(NAME)
