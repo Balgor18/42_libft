@@ -6,7 +6,7 @@
 #    By: fcatinau <fcatinau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/09 15:35:09 by fcatinau          #+#    #+#              #
-#    Updated: 2021/05/26 17:09:10 by fcatinau         ###   ########.fr        #
+#    Updated: 2021/05/29 16:47:41 by fcatinau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,8 @@ bonus : $(OBJ_BONUS) $(OBJ)
 		ranlib $(NAME)
 
 norme :
-		norminette -R CheckForbiddenSourceHeader $(SRC) $(SRC_BONUS)
-		norminette -R CheckDefine cub3D.h
+		norminette -R CheckForbiddenSourceHeader $(SRC)
+		norminette -R CheckForbiddenSourceHeader $(SRC_BONUS)
+		norminette -R CheckDefine libft.h
 
 .PHONY: clean fclean $(NAME)
