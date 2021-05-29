@@ -6,17 +6,17 @@
 /*   By: fcatinau <fcatinau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:53:45 by fcatinau          #+#    #+#             */
-/*   Updated: 2021/01/22 21:04:58 by fcatinau         ###   ########.fr       */
+/*   Updated: 2021/05/29 15:40:37 by fcatinau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char		*ft_get_save_line(char *save)
+char	*ft_get_save_line(char *save)
 {
-	char		*cpy;
-	size_t		i;
-	size_t		j;
+	char	*cpy;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = 0;
@@ -29,7 +29,8 @@ char		*ft_get_save_line(char *save)
 		free(save);
 		return (0);
 	}
-	if (!(cpy = malloc(sizeof(char) * ((ft_strlen(save) - i) + 1))))
+	cpy = malloc(sizeof(char) * ((ft_strlen(save) - i) + 1));
+	if (!cpy)
 		return (0);
 	i++;
 	while (save[i])
@@ -39,7 +40,7 @@ char		*ft_get_save_line(char *save)
 	return (cpy);
 }
 
-char		*get_line(char *str)
+char	*get_line(char *str)
 {
 	int		i;
 	char	*cpy;
@@ -49,7 +50,8 @@ char		*get_line(char *str)
 		return (0);
 	while (str[i] && str[i] != '\n')
 		i++;
-	if (!(cpy = malloc(sizeof(char) * (i + 1))))
+	cpy = malloc(sizeof(char) * (i + 1));
+	if (!cpy)
 		return (0);
 	i = 0;
 	while (str[i] && str[i] != '\n')
@@ -61,20 +63,22 @@ char		*get_line(char *str)
 	return (cpy);
 }
 
-int			get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
-	char			*buffer;
-	static char		*save[1024];
-	int				lire;
+	char		*buffer;
+	static char	*save[1024];
+	int			lire;
 
 	lire = 1;
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
-	if (!(buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
 		return (-1);
 	while (!ft_is_end(save[fd]) && lire != 0)
 	{
-		if ((lire = read(fd, buffer, BUFFER_SIZE)) == -1)
+		lire = read(fd, buffer, BUFFER_SIZE);
+		if (lire == -1)
 		{
 			free(buffer);
 			return (-1);
