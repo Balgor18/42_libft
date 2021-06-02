@@ -6,7 +6,7 @@
 /*   By: fcatinau <fcatinau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 20:43:18 by fcatinau          #+#    #+#             */
-/*   Updated: 2021/05/29 15:35:45 by fcatinau         ###   ########.fr       */
+/*   Updated: 2021/06/02 16:16:41 by fcatinau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*d)(void *))
 	t_list	*new_lst;
 	t_list	*new_elem;
 
+	new_lst = NULL;
 	if (!lst || !f)
 		return (NULL);
 	new_elem = ft_lstnew(f(lst->content));
