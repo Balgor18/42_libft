@@ -6,16 +6,22 @@
 /*   By: fcatinau <fcatinau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 20:43:18 by fcatinau          #+#    #+#             */
-/*   Updated: 2021/06/02 16:16:41 by fcatinau         ###   ########.fr       */
+/*   Updated: 2021/07/29 19:26:59 by fcatinau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 void	a(t_list *new_lst, t_list *new_elem, t_list *lst)
 {
 	new_lst = new_elem;
 	lst = lst->next;
+}
+
+void	clear(t_list *lst, t_list *new_lst, void (*d)(void *))
+{
+	ft_lstclear(&lst, d);
+	ft_lstclear(&new_lst, d);
 }
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*d)(void *))
@@ -38,8 +44,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*d)(void *))
 		new_elem = ft_lstnew(f(lst->content));
 		if (!new_elem)
 		{
-			ft_lstclear(&lst, d);
-			ft_lstclear(&new_lst, d);
+			clear(lst, new_lst, d);
 			break ;
 		}
 		lst = lst->next;
