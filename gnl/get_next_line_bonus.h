@@ -6,7 +6,7 @@
 /*   By: fcatinau <fcatinau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 14:44:07 by fcatinau          #+#    #+#             */
-/*   Updated: 2021/05/29 15:41:42 by fcatinau         ###   ########.fr       */
+/*   Updated: 2021/01/21 14:48:30 by fcatinau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
-# include "../libft.h"
 
 int			get_next_line(int fd, char **line);
+void		*ft_memmove(void *dst, const void *src, size_t len);
 int			ft_is_end(char *str);
 char		*join_str(char const *char1, char const *char2);
 size_t		ft_strlen(const char *s);

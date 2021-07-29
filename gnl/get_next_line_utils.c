@@ -6,7 +6,7 @@
 /*   By: fcatinau <fcatinau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 21:14:58 by fcatinau          #+#    #+#             */
-/*   Updated: 2021/05/26 17:24:59 by fcatinau         ###   ########.fr       */
+/*   Updated: 2021/07/08 16:15:45 by fcatinau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*join_str(char const *char1, char const *char2)
+char	*join_str(char const *char1, char const *char2, int lire)
 {
 	size_t	line_max_len;
 	char	*tmp;
 
 	if (!char1 && !char2)
 		return (0);
+	((char *)char2)[lire] = '\0';
 	line_max_len = ft_strlen((char *)char1) + ft_strlen((char *)char2) + 1;
 	tmp = malloc(sizeof(char) * line_max_len);
 	if (!tmp)

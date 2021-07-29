@@ -6,7 +6,7 @@
 /*   By: fcatinau <fcatinau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:53:45 by fcatinau          #+#    #+#             */
-/*   Updated: 2021/05/29 15:40:37 by fcatinau         ###   ########.fr       */
+/*   Updated: 2021/07/08 16:21:23 by fcatinau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_get_save_line(char *save)
 {
-	char	*cpy;
-	size_t	i;
-	size_t	j;
+	char		*cpy;
+	size_t		i;
+	size_t		j;
 
 	i = 0;
 	j = 0;
@@ -63,11 +63,17 @@ char	*get_line(char *str)
 	return (cpy);
 }
 
+int	lire_1(char *buffer)
+{
+	free(buffer);
+	return (-1);
+}
+
 int	get_next_line(int fd, char **line)
 {
-	char		*buffer;
-	static char	*save[1024];
-	int			lire;
+	char			*buffer;
+	static char		*save[1024];
+	int				lire;
 
 	lire = 1;
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
@@ -79,10 +85,7 @@ int	get_next_line(int fd, char **line)
 	{
 		lire = read(fd, buffer, BUFFER_SIZE);
 		if (lire == -1)
-		{
-			free(buffer);
-			return (-1);
-		}
+			return (lire_1(buffer));
 		buffer[lire] = '\0';
 		save[fd] = join_str(save[fd], buffer);
 	}

@@ -6,7 +6,7 @@
 /*   By: fcatinau <fcatinau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:53:49 by fcatinau          #+#    #+#             */
-/*   Updated: 2021/05/29 15:42:26 by fcatinau         ###   ########.fr       */
+/*   Updated: 2021/07/08 16:20:43 by fcatinau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,32 @@ char	*join_str(char const *char1, char const *char2)
 	tmp[line_max_len - 1] = '\0';
 	free((char *)char1);
 	return (tmp);
+}
+
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	if (!dst && !src)
+		return (NULL);
+	if (dst > src)
+	{
+		while (i < len)
+		{
+			((unsigned char *)dst)[len - 1] = ((unsigned char *)src)[len - 1];
+			len--;
+		}
+	}
+	else
+	{
+		while (i < len)
+		{
+			((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+			i++;
+		}
+	}
+	return (dst);
 }
 
 int	ft_is_end(char *str)
