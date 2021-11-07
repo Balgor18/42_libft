@@ -24,7 +24,6 @@ void	ft_lstdelall(t_gnl **lst)
 	}
 }
 
-
 int	ft_lstaddnew_front(struct s_data *data)
 {
 	t_gnl	*new_elem;
