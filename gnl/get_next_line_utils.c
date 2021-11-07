@@ -12,75 +12,85 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+void	ft_lstdelall(t_gnl **lst)
 {
-	int	i;
+	t_gnl	*tmp;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-char	*join_str(char const *char1, char const *char2, int lire)
-{
-	size_t	line_max_len;
-	char	*tmp;
-
-	if (!char1 && !char2)
-		return (0);
-	((char *)char2)[lire] = '\0';
-	line_max_len = ft_strlen((char *)char1) + ft_strlen((char *)char2) + 1;
-	tmp = malloc(sizeof(char) * line_max_len);
-	if (!tmp)
-		return (0);
-	ft_memmove(tmp, char1, ft_strlen((char *)char1));
-	ft_memmove(tmp + ft_strlen((char *)char1), char2, ft_strlen((char *)char2));
-	tmp[line_max_len - 1] = '\0';
-	free((char *)char1);
-	return (tmp);
-}
-
-void	*ft_memmove(void *dst, const void *src, size_t len)
-{
-	size_t	i;
-
-	i = 0;
-	if (!dst && !src)
-		return (NULL);
-	if (dst > src)
+	while (*lst)
 	{
-		while (i < len)
-		{
-			((unsigned char *)dst)[len - 1] = ((unsigned char *)src)[len - 1];
-			len--;
-		}
+		tmp = (*lst)->next;
+		free(*lst);
+		(*lst) = tmp;
 	}
+}
+
+
+int	ft_lstaddnew_front(struct s_data *data)
+{
+	t_gnl	*new_elem;
+
+	new_elem = malloc(sizeof(t_gnl));
+	if (!new_elem)
+	{
+		data->error = E_MALLOC_FAIL;
+		return (0);
+	}
+	*new_elem = (t_gnl){0};
+	new_elem->next = data->gnl;
+	data->gnl = new_elem;
+	return (1);
+}
+
+void	ft_cpy_buffer_list_free(t_gnl **gnl, char *line, size_t len_cpy)
+{
+	t_gnl	*tmp;
+
+	if (*(*gnl)->buf == '\0' && (len_cpy % BUFF_SIZE) != 0)
+	{
+		tmp = (*gnl)->next;
+		free(*gnl);
+		*gnl = tmp;
+	}
+	if (*gnl)
+	{
+		ft_memcpy(line - (len_cpy % BUFF_SIZE), (*gnl)->buf,
+			len_cpy % BUFF_SIZE);
+		line -= len_cpy % BUFF_SIZE;
+		tmp = (*gnl)->next;
+		free(*gnl);
+		*gnl = tmp;
+	}
+	while (*gnl)
+	{
+		ft_memcpy(line - BUFF_SIZE, (*gnl)->buf, BUFF_SIZE);
+		line -= BUFF_SIZE;
+		tmp = (*gnl)->next;
+		free(*gnl);
+		*gnl = tmp;
+	}
+}
+
+int	ft_no_newline_in_rest(struct s_data *data, struct s_mem *rest, char **line)
+{
+	data->ptrchr = ft_memchr(rest->str, '\n', rest->size);
+	if (!data->ptrchr && rest->status)
+		return (1);
+	else if (data->ptrchr)
+		data->line_size = data->ptrchr - rest->str;
 	else
 	{
-		while (i < len)
-		{
-			((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
-			i++;
-		}
+		data->line_size = rest->size;
+		return (1);
 	}
-	return (dst);
-}
-
-int	ft_is_end(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
+	*line = malloc(sizeof(char) * (data->line_size + 1));
+	if (!*line)
 	{
-		if (str[i] == '\n')
-			return (1);
-		i++;
+		data->error = E_MALLOC_FAIL;
+		return (-1);
 	}
+	ft_memcpy(*line, rest->str, data->line_size);
+	(*line)[data->line_size] = '\0';
+	rest->size = rest->size - data->line_size - 1;
+	ft_memmove(rest->str, rest->str + data->line_size + 1, rest->size);
 	return (0);
 }
